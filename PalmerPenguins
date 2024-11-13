@@ -1,3 +1,22 @@
 ## The following work is from my course work in Google Data Analytics Certificate.
 ## The following work was in R using the Palmer Penguins data set.
 
+install.packages("palmerpenguins")
+library(palmerpenguins)
+head(penguins)
+
+## find the mean bill length of penguins from each island group.
+
+penguin %>%
+  group_by(island) %>%
+  drop_na() %>%
+  summaraize(mean_bill_length_mm = mean(bill_length_mm))
+
+
+# A tibble: 3 × 2
+  island    mean_bill_length_mm
+  <fct>                   <dbl>
+1 Biscoe                   45.2
+2 Dream                    44.2
+3 Torgersen                39.0
+
