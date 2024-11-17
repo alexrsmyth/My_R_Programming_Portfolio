@@ -1,17 +1,35 @@
 ## The following work is from my course work in Google Data Analytics Certificate.
 ## The following work was in R using the Palmer Penguins data set.
 
+install.packages("tidyverse")
+library(tidyverse)
 install.packages("palmerpenguins")
 library(palmerpenguins)
 head(penguins)
 
-## find the mean bill length of penguins from each island group.
+## Arrange results by penguin bill length in desending order
+penguins %>% 
+  arrange(-bill_length_mm)
 
-penguin %>%
-  group_by(island) %>%
-  drop_na() %>%
-  summaraize(mean_bill_length_mm = mean(bill_length_mm))
+# A tibble: 344 × 8
+   species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+   <fct>     <fct>           <dbl>         <dbl>             <int>       <int> <fct> 
+ 1 Gentoo    Biscoe           59.6          17                 230        6050 male  
+ 2 Chinstrap Dream            58            17.8               181        3700 female
+ 3 Gentoo    Biscoe           55.9          17                 228        5600 male  
+ 4 Chinstrap Dream            55.8          19.8               207        4000 male  
+ 5 Gentoo    Biscoe           55.1          16                 230        5850 male 
 
+## Save the above data into a data frame named penguins2
+penguins2 <- penguins %>% arrange(-bill_length_mm)
+
+
+
+## What are the mean bill lengths of penguins on each island?
+penguins %>% 
+  group_by(island) %>% 
+  drop_na() %>% 
+  summarize(mean_bill_length_mm = mean(bill_length_mm))
 
 # A tibble: 3 × 2
   island    mean_bill_length_mm
@@ -20,3 +38,50 @@ penguin %>%
 2 Dream                    44.2
 3 Torgersen                39.0
 
+
+
+## Which island had the penguins with the longest bill length?
+penguins %>% 
+  group_by(island) %>% 
+  drop_na() %>% 
+  summarize(max_bill_length_mm = max(bill_length_mm))
+
+# A tibble: 3 × 2
+  island    max_bill_length_mm
+  <fct>                  <dbl>
+1 Biscoe                  59.6
+2 Dream                   58  
+3 Torgersen               46 
+
+
+
+## Group the species on each island and summarize the max and mean bill lengths.
+penguins %>% 
+  group_by(species, island) %>% 
+  drop_na() %>% 
+  summarize(max_bill = max(bill_length_mm), mean_bl = mean(bill_length_mm))
+
+# A tibble: 5 × 4
+# Groups:   species [3]
+  species   island    max_bill mean_bl
+  <fct>     <fct>        <dbl>   <dbl>
+1 Adelie    Biscoe        45.6    39.0
+2 Adelie    Dream         44.1    38.5
+3 Adelie    Torgersen     46      39.0
+4 Chinstrap Dream         58      48.8
+5 Gentoo    Biscoe        59.6    47.6
+
+
+
+## Fliter results for just Adelie penguins
+penguins %>% 
+  filter(species == "Adelie")
+
+# A tibble: 152 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex  
+   <fct>   <fct>              <dbl>         <dbl>             <int>       <int> <fct>
+ 1 Adelie  Torgersen           39.1          18.7               181        3750 male 
+ 2 Adelie  Torgersen           39.5          17.4               186        3800 fema…
+ 3 Adelie  Torgersen           40.3          18                 195        3250 fema…
+ 4 Adelie  Torgersen           NA            NA                  NA          NA NA   
+ 5 Adelie  Torgersen           36.7          19.3               193        3450 fema…
