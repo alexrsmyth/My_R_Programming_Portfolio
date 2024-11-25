@@ -85,3 +85,10 @@ penguins %>%
  3 Adelie  Torgersen           40.3          18                 195        3250 fema…
  4 Adelie  Torgersen           NA            NA                  NA          NA NA   
  5 Adelie  Torgersen           36.7          19.3               193        3450 fema…
+
+
+
+## Practice with ggplot2
+## Create a scatterplot for comparing flipper length and body mass.
+
+ggplot(data = penguins) + geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g))
