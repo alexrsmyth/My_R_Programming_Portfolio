@@ -89,6 +89,43 @@ penguins %>%
 
 
 ## Practice with ggplot2
+
+install.packages("palmerpenguins")
+library(palmerpenguins)
+install.packages("ggplot2")
+library(ggplot2)
+
+data("penguins")
+View(penguins)
+
 ## Create a scatterplot for comparing flipper length and body mass.
 
 ggplot(data = penguins) + geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g))
+
+
+## Now compare bill length and bill depth
+ggplot(data = penguins)+geom_point(mapping = aes(x=bill_length_mm,y=bill_depth_mm))
+
+
+## Now add a color aesthetic to distinguish species
+ggplot(data = penguins)+geom_point(mapping = aes(x=flipper_length_mm,y=body_mass_g,color=species))
+
+
+## Now add a shape aesthetic to distinguish species instead of color
+ggplot(data = penguins)+geom_point(mapping = aes(x=flipper_length_mm,y=body_mass_g,shape = species))
+
+
+## Now have both shape and color aesthetics to distinguish species
+ggplot(data = penguins)+geom_point(mapping = aes(x=flipper_length_mm,y=body_mass_g,shape = species,colour = species))
+
+
+## Now add size aesthetic to the above code
+ggplot(data = penguins)+geom_point(mapping = aes(x=flipper_length_mm,y=body_mass_g,shape = species,colour = species,size = species))
+
+
+## Now map using alpha
+ggplot(data = penguins)+geom_point(mapping = aes(x=flipper_length_mm,y=body_mass_g,alpha = species))
+
+
+## Finally make all points purple
+ggplot(data = penguins)+geom_point(mapping = aes(x=flipper_length_mm,y=body_mass_g),color='purple')
