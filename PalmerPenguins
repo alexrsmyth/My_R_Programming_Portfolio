@@ -129,3 +129,23 @@ ggplot(data = penguins)+geom_point(mapping = aes(x=flipper_length_mm,y=body_mass
 
 ## Finally make all points purple
 ggplot(data = penguins)+geom_point(mapping = aes(x=flipper_length_mm,y=body_mass_g),color='purple')
+
+
+## Try using geom_smooth
+ggplot(data = penguins)+geom_smooth(mapping = aes(x=flipper_length_mm,y=body_mass_g))
+
+
+## Combine geom_smooth and geom_point to see the two together
+ggplot(data = penguins)+
+  geom_smooth(mapping = aes(x=flipper_length_mm,y=body_mass_g))+
+  geom_point(mapping = aes(x=flipper_length_mm,y=body_mass_g))
+
+
+## Have different line types per species
+ggplot(data = penguins)+
+  geom_smooth(mapping = aes(x=flipper_length_mm,y=body_mass_g,linetype = species))
+
+
+## Use geom_jitter
+ggplot(data = penguins)+
+  geom_jitter(mapping = aes(x=flipper_length_mm,y=body_mass_g))
