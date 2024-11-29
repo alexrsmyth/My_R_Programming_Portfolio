@@ -107,3 +107,25 @@ ggplot(data = hotel_bookings)+
   geom_bar(mapping = aes(x=distribution_channel))+
   facet_wrap(~market_segment)+
   theme(axis.text.x = element_text(angle = 45))
+
+
+
+## Stakeholder would like a visualization that compares market segments between city hotels and resort hotels.  Create a cleaned and labeled version as a .png file for them to include in a presentation.
+
+ggplot(data = hotel_bookings)+
+  geom_bar(mapping = aes(x=market_segment)+
+  facet_wrap(~hotels)
+  labs(title="Market Segments: City Hotels v. Resort Hotels")
+
+## adding labels for date range and changing angle of bar names for easier reading and save the image as a .png file.
+
+mindate <- min(hotel_bookings$arrival_date_year)
+maxdate <- max(hotel_bookings$arrival_date_year)
+
+ggplot(data = hotel_bookings)+
+  geom_bar(mapping = aes(x=market_segment)+
+  facet_wrap(~hotels)+
+  theme(axis.text.x = element_text(angle = 45))+
+  labs(title="Market Segments: City Hotels v. Resort Hotels", caption=paste0("Date From: ", mindate, " to", maxdate), x="Market Segments", y="Number of Bookings")
+
+ggsave('hotel_bookings_chart.png', width=7, height=7)
